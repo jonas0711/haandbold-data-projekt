@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Håndbold Scoreboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        <button class="play-button"></button>
+        <div class="team">Hjemmehold</div>
+        <div class="score">0 - 0</div>
+        <div class="team">Udehold</div>
+    </div>
+    <div class="time">00:00</div>
+    
+    <div class="columns">
+        <div class="column">
+            <div class="column-header">
+                <label>Målvogter</label>
+                <select>
+                    <option>Vælg spiller</option>
+                </select>
+            </div>
+            <div class="defense-system">
+                <div class="defense-buttons">
+                    <input type="radio" id="home-60" name="home-defense" value="6:0" checked>
+                    <label for="home-60">6:0</label>
+                    <input type="radio" id="home-51" name="home-defense" value="5:1">
+                    <label for="home-51">5:1</label>
+                    <input type="radio" id="home-42" name="home-defense" value="4:2">
+                    <label for="home-42">4:2</label>
+                    <input type="radio" id="home-33" name="home-defense" value="3:3">
+                    <label for="home-33">3:3</label>
+                    <input type="radio" id="home-321" name="home-defense" value="3:2:1">
+                    <label for="home-321">3:2:1</label>
+                </div>
+            </div>
+            <div class="players-section">
+                <div class="players-grid player-buttons">
+                    <input type="radio" id="home-player-1" name="home-player" value="1">
+                    <label for="home-player-1">1</label>
+                    <input type="radio" id="home-player-2" name="home-player" value="2">
+                    <label for="home-player-2">2</label>
+                    <input type="radio" id="home-player-3" name="home-player" value="3">
+                    <label for="home-player-3">3</label>
+                    <input type="radio" id="home-player-4" name="home-player" value="4">
+                    <label for="home-player-4">4</label>
+                    <input type="radio" id="home-player-5" name="home-player" value="5">
+                    <label for="home-player-5">5</label>
+                    <input type="radio" id="home-player-6" name="home-player" value="6">
+                    <label for="home-player-6">6</label>
+                    <input type="radio" id="home-player-7" name="home-player" value="7">
+                    <label for="home-player-7">7</label>
+                    <input type="radio" id="home-player-8" name="home-player" value="8">
+                    <label for="home-player-8">8</label>
+                    <input type="radio" id="home-player-9" name="home-player" value="9">
+                    <label for="home-player-9">9</label>
+                    <input type="radio" id="home-player-10" name="home-player" value="10">
+                    <label for="home-player-10">10</label>
+                    <input type="radio" id="home-player-11" name="home-player" value="11">
+                    <label for="home-player-11">11</label>
+                    <input type="radio" id="home-player-12" name="home-player" value="12">
+                    <label for="home-player-12">12</label>
+                </div>
+            </div>
+            <div class="attack-section">
+                <div class="section-header">
+                    <span class="section-title">Angrebsåbninger</span>
+                    <button class="add-button">Tilføj</button>
+                </div>
+                <div class="attack-options">
+                    <button class="attack-option active">Frit Spil</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="column middle-column">
+            <div class="sections">
+                <div class="section">Sektion 1</div>
+                <div class="section">Sektion 2</div>
+                <div class="section">Sektion 3</div>
+            </div>
+        </div>
+        
+        <div class="column">
+            <div class="column-header">
+                <label>Målvogter</label>
+                <select>
+                    <option>Vælg spiller</option>
+                </select>
+            </div>
+            <div class="defense-system">
+                <div class="defense-buttons">
+                    <input type="radio" id="away-60" name="away-defense" value="6:0" checked>
+                    <label for="away-60">6:0</label>
+                    <input type="radio" id="away-51" name="away-defense" value="5:1">
+                    <label for="away-51">5:1</label>
+                    <input type="radio" id="away-42" name="away-defense" value="4:2">
+                    <label for="away-42">4:2</label>
+                    <input type="radio" id="away-33" name="away-defense" value="3:3">
+                    <label for="away-33">3:3</label>
+                    <input type="radio" id="away-321" name="away-defense" value="3:2:1">
+                    <label for="away-321">3:2:1</label>
+                </div>
+            </div>
+            <div class="players-section">
+                <div class="players-grid player-buttons">
+                    <input type="radio" id="away-player-1" name="away-player" value="1">
+                    <label for="away-player-1">1</label>
+                    <input type="radio" id="away-player-2" name="away-player" value="2">
+                    <label for="away-player-2">2</label>
+                    <input type="radio" id="away-player-3" name="away-player" value="3">
+                    <label for="away-player-3">3</label>
+                    <input type="radio" id="away-player-4" name="away-player" value="4">
+                    <label for="away-player-4">4</label>
+                    <input type="radio" id="away-player-5" name="away-player" value="5">
+                    <label for="away-player-5">5</label>
+                    <input type="radio" id="away-player-6" name="away-player" value="6">
+                    <label for="away-player-6">6</label>
+                    <input type="radio" id="away-player-7" name="away-player" value="7">
+                    <label for="away-player-7">7</label>
+                    <input type="radio" id="away-player-8" name="away-player" value="8">
+                    <label for="away-player-8">8</label>
+                    <input type="radio" id="away-player-9" name="away-player" value="9">
+                    <label for="away-player-9">9</label>
+                    <input type="radio" id="away-player-10" name="away-player" value="10">
+                    <label for="away-player-10">10</label>
+                    <input type="radio" id="away-player-11" name="away-player" value="11">
+                    <label for="away-player-11">11</label>
+                    <input type="radio" id="away-player-12" name="away-player" value="12">
+                    <label for="away-player-12">12</label>
+                </div>
+            </div>
+            <div class="attack-section">
+                <div class="section-header">
+                    <span class="section-title">Angrebsåbninger</span>
+                    <button class="add-button">Tilføj</button>
+                </div>
+                <div class="attack-options">
+                    <button class="attack-option active">Frit Spil</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Player selection/deselection handling
+            document.querySelectorAll('.player-buttons input[type="radio"]').forEach(radio => {
+                radio.addEventListener('click', function(e) {
+                    if (this.dataset.lastChecked === 'true') {
+                        this.checked = false;
+                        this.dataset.lastChecked = false;
+                    } else {
+                        const name = this.name;
+                        document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+                            r.dataset.lastChecked = false;
+                        });
+                        this.dataset.lastChecked = true;
+                    }
+                });
+            });
+
+            // Attack option selection
+            document.querySelectorAll('.attack-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const parent = this.closest('.attack-options');
+                    parent.querySelectorAll('.attack-option').forEach(opt => {
+                        opt.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                });
+            });
+
+            // Add new attack option
+            document.querySelectorAll('.add-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const name = prompt('Indtast navn på ny angrebsåbning:');
+                    if (name) {
+                        const optionsContainer = this.closest('.attack-section')
+                            .querySelector('.attack-options');
+                        const newOption = document.createElement('button');
+                        newOption.className = 'attack-option';
+                        newOption.textContent = name;
+                        newOption.addEventListener('click', function() {
+                            optionsContainer.querySelectorAll('.attack-option')
+                                .forEach(opt => opt.classList.remove('active'));
+                            this.classList.add('active');
+                        });
+                        optionsContainer.appendChild(newOption);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

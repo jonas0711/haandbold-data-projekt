@@ -1,0 +1,347 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.play-button {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 12px solid #000;
+    cursor: pointer;
+    background: none;
+    border-right: none;
+    padding: 0;
+}
+
+.team {
+    flex: 1;
+    font-size: 18px;
+}
+
+.score {
+    padding: 0 20px;
+    font-size: 18px;
+}
+
+.time {
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Main Layout */
+.columns {
+    display: flex;
+    gap: 20px;
+    flex: 1;
+    min-height: 0;
+}
+
+.column {
+    flex: 0 0 300px;
+    border: 1px solid #ccc;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.middle-column {
+    flex: 1;
+}
+
+/* Column Header (Målvogter) */
+.column-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+}
+
+.column-header label {
+    font-weight: normal;
+}
+
+.column-header select {
+    width: 150px;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+}
+
+/* Defense System */
+.defense-system {
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+}
+
+.defense-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.defense-buttons input[type="radio"] {
+    display: none;
+}
+
+.defense-buttons label {
+    padding: 6px 12px;
+    text-align: center;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    border-radius: 4px;
+    background: white;
+    font-size: 14px;
+    flex: 1;
+    user-select: none;
+}
+
+.defense-buttons input[type="radio"]:checked + label {
+    background: #4285f4;
+    color: white;
+    border-color: #4285f4;
+}
+
+/* Players Section */
+.players-section {
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+}
+
+.players-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 5px;
+}
+
+.player-buttons input[type="radio"] {
+    display: none;
+}
+
+.player-buttons label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    font-size: 13px;
+    background: white;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.player-buttons input[type="radio"]:checked + label {
+    background: #4285f4;
+    color: white;
+    border-color: #4285f4;
+}
+
+/* Attack Section */
+.attack-section {
+    padding: 8px;
+    border-top: none;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.section-title {
+    font-weight: normal;
+}
+
+.add-button {
+    padding: 4px 12px;
+    background: #4285f4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background-color 0.2s ease;
+}
+
+.attack-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.attack-option {
+    background: white;
+    border: 1px solid #ccc;
+    padding: 4px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    user-select: none;
+    transition: all 0.2s ease;
+}
+
+.attack-option.active {
+    background: #4285f4;
+    color: white;
+    border-color: #4285f4;
+}
+
+/* Middle Column Sections */
+.sections {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    height: 100%;
+}
+
+.section {
+    border: 1px solid #ccc;
+    padding: 12px;
+    background: #fff;
+    border-radius: 2px;
+}
+
+/* Hover States */
+.defense-buttons label:hover,
+.player-buttons label:hover,
+.attack-option:hover {
+    background: #f8f9fa;
+}
+
+.add-button:hover {
+    background: #3367d6;
+}
+
+.defense-buttons label:hover,
+.player-buttons label:hover {
+    border-color: #999;
+}
+
+/* Focus States */
+.add-button:focus,
+.attack-option:focus,
+.defense-buttons input:focus + label,
+.player-buttons input:focus + label,
+select:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.25);
+}
+
+/* Scrollbar Styling */
+.players-section::-webkit-scrollbar {
+    width: 6px;
+}
+
+.players-section::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.players-section::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+.players-section::-webkit-scrollbar-thumb:hover {
+    background: #666;
+}
+
+/* Disabled States */
+button:disabled,
+input:disabled + label,
+select:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .column {
+        flex: 0 0 250px;
+    }
+
+    .column-header select {
+        width: 120px;
+    }
+}
+
+@media (max-width: 992px) {
+    body {
+        padding: 10px;
+    }
+
+    .columns {
+        gap: 10px;
+    }
+
+    .column {
+        flex: 0 0 220px;
+    }
+
+    .defense-buttons label {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+
+    .player-buttons label {
+        font-size: 12px;
+    }
+
+    .add-button,
+    .attack-option {
+        padding: 3px 8px;
+        font-size: 12px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    body {
+        padding: 0;
+    }
+
+    .add-button,
+    .play-button {
+        display: none;
+    }
+
+    .column,
+    .section {
+        border: 1px solid #000;
+    }
+}
