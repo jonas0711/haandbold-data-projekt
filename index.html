@@ -77,12 +77,135 @@
         
         <div class="column middle-column">
             <div class="sections">
-                <div class="section">Sektion 1</div>
-                <div class="section">Sektion 2</div>
-                <div class="section">Sektion 3</div>
+                <!-- Ny Sektion: Spørgsmål til Mål -->
+                <div class="section" id="goal-questions" style="display: none;">
+                    <h3>Målspecifikation</h3>
+                    <div class="switch-container">
+                        <label for="parade-switch">Var der parade?</label>
+                        <label class="switch">
+                            <input type="checkbox" id="parade-switch">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="question-container">
+                        <!-- Spørgsmål 1 -->
+                        <div class="question" data-question="1">
+                            <p>Zoner for positioner:</p>
+                            <div class="options">
+                                <button class="option-button">1</button>
+                                <button class="option-button">2 (6-9m)</button>
+                                <button class="option-button">2 (9+m)</button>
+                                <button class="option-button">3 (6-9m)</button>
+                                <button class="option-button">3 (9+m)</button>
+                                <button class="option-button">4 (6-9m)</button>
+                                <button class="option-button">4 (9+m)</button>
+                                <button class="option-button">5 (6-9m)</button>
+                                <button class="option-button">5 (9+m)</button>
+                                <button class="option-button">6</button>
+                            </div>
+                        </div>
+                        <!-- Spørgsmål 2 -->
+                        <div class="question" data-question="2" style="display: none;">
+                            <p>Skudtyper:</p>
+                            <div class="options">
+                                <button class="option-button">Gennembrud</button>
+                                <button class="option-button">Hopskud</button>
+                                <button class="option-button">Stående Skud</button>
+                                <button class="option-button">Underhånd</button>
+                                <button class="option-button">Stregskud</button>
+                                <button class="option-button">Frit Gennemløb</button>
+                            </div>
+                        </div>
+                        <!-- Spørgsmål 3 -->
+                        <div class="question" data-question="3" style="display: none;">
+                            <p>Placering i målet:</p>
+                            <div class="options">
+                                <button class="option-button">Venstre Bund</button>
+                                <button class="option-button">Venstre Midt</button>
+                                <button class="option-button">Venstre Top</button>
+                                <button class="option-button">Midt Bund</button>
+                                <button class="option-button">Midt Midt</button>
+                                <button class="option-button">Midt Top</button>
+                                <button class="option-button">Højre Bund</button>
+                                <button class="option-button">Højre Midt</button>
+                                <button class="option-button">Højre Top</button>
+                            </div>
+                        </div>
+                        <!-- Spørgsmål 4 -->
+                        <div class="question" data-question="4" style="display: none;">
+                            <p>Assist:</p>
+                            <div class="options">
+                                <button class="option-button">Ingen</button>
+                                <!-- Dynamisk genererede assist-knapper baseret på spillernumre -->
+                                <!-- Eksempel: -->
+                                <button class="option-button">1</button>
+                                <button class="option-button">2</button>
+                                <button class="option-button">3</button>
+                                <!-- Tilføj flere knapper efter behov -->
+                            </div>
+                        </div>
+                        <!-- Spørgsmål 5 -->
+                        <div class="question" data-question="5" style="display: none;">
+                            <p>Var der en forsvarsfejl?</p>
+                            <div class="options">
+                                <button class="option-button">Ingen</button>
+                                <button class="option-button">Højde</button>
+                                <button class="option-button">Tællefejl</button>
+                                <button class="option-button" id="add-fault">Tilføj fejl</button>
+                            </div>
+                            <!-- Formular til at tilføje fejl, skjult som standard -->
+                            <div class="add-fault-form" style="display: none; margin-top: 10px;">
+                                <input type="text" id="fault-description" placeholder="Beskriv fejlen">
+                                <button class="submit-fault-button">Indsend</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slut på ny Sektion -->
+                
+                <div class="section">
+                    <h3>Fase</h3>
+                    <div class="phase-selection">
+                        <input type="radio" id="stationaer-angreb" name="fase" value="Stationært Angreb" checked>
+                        <label for="stationaer-angreb">Stationært Angreb</label>
+
+                        <input type="radio" id="andens-bolge" name="fase" value="2. Bølge">
+                        <label for="andens-bolge">2. Bølge</label>
+
+                        <input type="radio" id="første-bolge" name="fase" value="1. Bølge">
+                        <label for="første-bolge">1. Bølge</label>
+                    </div>
+                </div>
+                <div class="section">
+                    <h3>Handlinger</h3>
+                    <div class="action-buttons">
+                        <button class="action-button">Mål</button>
+                        <button class="action-button">Skud reddet</button>
+                        <button class="action-button">Skud på stolpe</button>
+                        <button class="action-button">Skud forbi</button>
+                        <button class="action-button">Skud blokeret</button>
+                    </div>
+                </div>
+                <div class="section">
+                    <h3>Overtrædelser</h3>
+                    <div class="violation-buttons">
+                        <button class="violation-button">Fejlaflevering</button>
+                        <button class="violation-button">Tabt bold</button>
+                        <button class="violation-button">Regelfejl</button>
+                        <button class="violation-button">Tilkendt straffe</button>
+                    </div>
+                </div>
+                <div class="section">
+                    <h3>Disciplinære Handlinger</h3>
+                    <div class="disciplinary-buttons">
+                        <button class="disciplinary-button">Udvisning</button>
+                        <button class="disciplinary-button">Gult kort</button>
+                        <button class="disciplinary-button">Rødt kort</button>
+                    </div>
+                </div>
             </div>
         </div>
-        
+
         <div class="column">
             <div class="column-header">
                 <label>Målvogter</label>
@@ -170,6 +293,13 @@
                         opt.classList.remove('active');
                     });
                     this.classList.add('active');
+                    
+                    // Hvis "Mål" trykkes, vis spørgsmålsektionen
+                    if (this.textContent.trim() === 'Mål') {
+                        showGoalQuestions();
+                    } else {
+                        hideGoalQuestions();
+                    }
                 });
             });
 
@@ -187,11 +317,144 @@
                             optionsContainer.querySelectorAll('.attack-option')
                                 .forEach(opt => opt.classList.remove('active'));
                             this.classList.add('active');
+                            
+                            if (this.textContent.trim() === 'Mål') {
+                                showGoalQuestions();
+                            } else {
+                                hideGoalQuestions();
+                            }
                         });
                         optionsContainer.appendChild(newOption);
                     }
                 });
             });
+
+            // Handling for action buttons in Sektion 2
+            document.querySelectorAll('.action-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    if (this.textContent.trim() === 'Mål') {
+                        showGoalQuestions();
+                    } else {
+                        alert(`Du har trykket på: ${this.textContent}`);
+                        // Her kan du tilføje yderligere funktionalitet, fx opdatere score
+                    }
+                });
+            });
+
+            // Handling for violation buttons in Sektion 3
+            document.querySelectorAll('.violation-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    alert(`Du har trykket på: ${this.textContent}`);
+                    // Her kan du tilføje yderligere funktionalitet, fx registrere overtrædelse
+                });
+            });
+
+            // Handling for disciplinary buttons in Sektion 4
+            document.querySelectorAll('.disciplinary-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    alert(`Du har trykket på: ${this.textContent}`);
+                    // Her kan du tilføje yderligere funktionalitet, fx registrere disciplinær handling
+                });
+            });
+
+            // Goal Questions Handling
+            const goalQuestions = document.getElementById('goal-questions');
+            const switchParade = document.getElementById('parade-switch');
+            const questions = goalQuestions.querySelectorAll('.question');
+            let currentQuestion = 0;
+            let parade = false;
+            let assistPlayer = null;
+            let addedFault = null;
+
+            function showGoalQuestions() {
+                goalQuestions.style.display = 'block';
+                currentQuestion = 0;
+                parade = false;
+                assistPlayer = null;
+                addedFault = null;
+                switchParade.checked = false;
+                questions.forEach(q => q.style.display = 'none');
+                questions[0].style.display = 'block';
+            }
+
+            function hideGoalQuestions() {
+                goalQuestions.style.display = 'none';
+            }
+
+            // Event listeners for questions
+            questions.forEach(question => {
+                const buttons = question.querySelectorAll('.option-button');
+                buttons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        // Håndter svar baseret på spørgsmålet
+                        const qNumber = parseInt(question.getAttribute('data-question'));
+                        if (qNumber === 1) {
+                            // Zoner for positioner
+                            console.log(`Zonestatus valgt: ${this.textContent}`);
+                        } else if (qNumber === 2) {
+                            // Skudtyper
+                            console.log(`Skudtype valgt: ${this.textContent}`);
+                        } else if (qNumber === 3) {
+                            // Placering i målet
+                            console.log(`Placering i målet valgt: ${this.textContent}`);
+                        } else if (qNumber === 4) {
+                            // Assist
+                            assistPlayer = this.textContent.trim();
+                            console.log(`Assist valgt: ${assistPlayer}`);
+                        } else if (qNumber === 5) {
+                            // Var der en forsvarsfejl?
+                            if (this.id === 'add-fault') {
+                                // Vis formular til at tilføje fejl
+                                question.querySelector('.add-fault-form').style.display = 'flex';
+                            } else {
+                                console.log(`Forsvarsfejl valgt: ${this.textContent}`);
+                                proceedToNextQuestion();
+                            }
+                            return; // Stop videre for denne klik
+                        }
+
+                        proceedToNextQuestion();
+                    });
+                });
+            });
+
+            // Handling tilføj fejl
+            const addFaultButton = document.getElementById('add-fault');
+            const faultForm = addFaultButton.parentElement.querySelector('.add-fault-form');
+            const faultDescriptionInput = document.getElementById('fault-description');
+            const submitFaultButton = document.querySelector('.submit-fault-button');
+
+            submitFaultButton.addEventListener('click', function() {
+                const description = faultDescriptionInput.value.trim();
+                if (description) {
+                    addedFault = description;
+                    console.log(`Tilføjet fejl: ${addedFault}`);
+                    faultDescriptionInput.value = '';
+                    faultForm.style.display = 'none';
+                    proceedToNextQuestion();
+                } else {
+                    alert('Indtast venligst en beskrivelse af fejlen.');
+                }
+            });
+
+            // Handling switch for parade
+            switchParade.addEventListener('change', function() {
+                parade = this.checked;
+                console.log(`Var der parade? ${parade ? 'Ja' : 'Nej'}`);
+            });
+
+            function proceedToNextQuestion() {
+                questions[currentQuestion].style.display = 'none';
+                currentQuestion++;
+                if (currentQuestion < questions.length) {
+                    questions[currentQuestion].style.display = 'block';
+                } else {
+                    // Alle spørgsmål besvaret
+                    alert('Alle målspørgsmål er besvaret.');
+                    hideGoalQuestions();
+                    // Her kan du tilføje yderligere funktionalitet, fx gemme data
+                }
+            }
         });
     </script>
 </body>
