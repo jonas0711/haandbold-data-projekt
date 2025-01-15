@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Håndbold Kampe</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a56db;
+            --primary-light: #60a5fa;
+            --primary-dark: #1e429f;
+            --win-color: #059669;
+            --lose-color: #dc2626;
+            --draw-color: #d97706;
+            --background-color: #f3f4f6;
+            --card-background: #ffffff;
+            --text-primary: #111827;
+            --text-secondary: #4b5563;
+            --border-radius: 12px;
+        }
+
+        body {
+            background-color: var(--background-color);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        .navbar {
+            background-color: var(--card-background);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            color: var(--primary-color) !important;
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .navbar-brand i {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+
+        .filters {
+            background: var(--card-background);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .filter-button {
+            background: var(--background-color);
+            border: 1px solid var(--primary-light);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .filter-button:hover {
+            background: var(--primary-light);
+            color: white;
+        }
+
+        .filter-button.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .date-group {
+            margin: 2rem 0;
+        }
+
+        .date-header {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .match-card {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+            margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .match-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .match-card:focus-within {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .match-status {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-light);
+        }
+
+        .match-status.win {
+            background: var(--win-color);
+        }
+
+        .match-status.loss {
+            background: var(--lose-color);
+        }
+
+        .match-status.draw {
+            background: var(--draw-color);
+        }
+
+        .match-date {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .match-date i {
+            color: var(--primary-color);
+        }
+
+        .match-container {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .team-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .team-home {
+            justify-content: flex-end;
+        }
+
+        .team-away {
+            justify-content: flex-start;
+        }
+
+        .team-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            line-height: 1.2;
+        }
+
+        .team-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .score-container {
+            background: var(--primary-color);
+            color: white;
+            border-radius: 24px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            min-width: 120px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .quick-stats {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--background-color);
+            display: flex;
+            justify-content: space-around;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stat-item i {
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .team-name {
+                font-size: 0.9rem;
+            }
+
+            .score-container {
+                min-width: 90px;
+                font-size: 1.25rem;
+                padding: 0.5rem 1rem;
+            }
+
+            .team-icon {
+                width: 32px;
+                height: 32px;
+            }
+
+            .match-container {
+                gap: 0.75rem;
+            }
+        }
+
+        .skeleton {
+            animation: skeleton-loading 1s linear infinite alternate;
+        }
+
+        @keyframes skeleton-loading {
+            0% {
+                background-color: rgba(0,0,0,0.05);
+            }
+            100% {
+                background-color: rgba(0,0,0,0.15);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="/" aria-label="Håndbold Statistik Hjem">
+                <i class="fas fa-handball-ball" aria-hidden="true"></i>
+                Håndbold Statistik
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="filters">
+            <div class="d-flex gap-2 flex-wrap">
+                <button class="filter-button active" aria-pressed="true">Alle kampe</button>
+                <button class="filter-button" aria-pressed="false">Herreligaen</button>
+                <button class="filter-button" aria-pressed="false">1. division</button>
+                <button class="filter-button" aria-pressed="false">Pokalturneringen</button>
+            </div>
+        </div>
+
+        {% set current_date = None %}
+        {% for match in matches %}
+            {% if match.date != current_date %}
+                {% if current_date != None %}
+                    </div>
+                {% endif %}
+                <div class="date-group">
+                    <h2 class="date-header">
+                        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+                        {{ match.date|format_date }}
+                    </h2>
+                {% set current_date = match.date %}
+            {% endif %}
+
+            <div class="col-12">
+                <a href="{{ url_for('match_details', database=match.database) }}" 
+                   class="text-decoration-none" 
+                   aria-label="Kamp mellem {{ match.home_team|format_team_name }} og {{ match.away_team|format_team_name }}">
+                    <div class="match-card">
+                        {% set score = get_validated_score(match) %}
+                        {% if score %}
+                            {% set home_score, away_score = score %}
+                            <div class="match-status {% if home_score > away_score %}win{% elif away_score > home_score %}loss{% else %}draw{% endif %}"></div>
+                            <div class="card-body">
+                                <div class="match-container">
+                                    <div class="team-container team-home">
+                                        <span class="team-name">{{ match.home_team|format_team_name }}</span>
+                                        <div class="team-icon">
+                                            <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                    <div class="score-container" aria-label="Slutresultat {{ score[0] }}-{{ score[1] }}">
+                                        {{ score[0] }}-{{ score[1] }}
+                                    </div>
+                                    <div class="team-container team-away">
+                                        <div class="team-icon">
+                                            <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                                        </div>
+                                        <span class="team-name">{{ match.away_team|format_team_name }}</span>
+                                    </div>
+                                </div>
+                                {% set stats = get_match_statistics(match) %}
+                                <div class="quick-stats">
+                                    <div class="stat-item">
+                                        <i class="fas fa-clock" aria-hidden="true"></i>
+                                        <span>{{ stats.duration }} min</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <i class="fas fa-users" aria-hidden="true"></i>
+                                        <span>{{ stats.player_count }} spillere</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <i class="fas fa-chart-line" aria-hidden="true"></i>
+                                        <span>{{ stats.total_goals }} mål i alt</span>
+                                    </div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="card-body">
+                                <div class="match-status"></div>
+                                <div class="match-container">
+                                    <div class="team-container team-home">
+                                        <span class="team-name">{{ match.home_team|format_team_name }}</span>
+                                        <div class="team-icon">
+                                            <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                    <div class="score-container" aria-label="Resultat ikke tilgængeligt">
+                                        -
+                                    </div>
+                                    <div class="team-container team-away">
+                                        <div class="team-icon">
+                                            <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                                        </div>
+                                        <span class="team-name">{{ match.away_team|format_team_name }}</span>
+                                    </div>
+                                </div>
+                                <div class="quick-stats">
+                                    <div class="stat-item">
+                                        <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
+                                        <span>Afventer kampstart</span>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+        {% if current_date != None %}
+            </div>
+        {% endif %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Tilføj loading states
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-button');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    // Her kunne tilføjes faktisk filtrering
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

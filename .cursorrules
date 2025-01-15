@@ -1,0 +1,165 @@
+# Håndbold Statistik Projekt Regler
+
+Always start answers with: "WUHUUU"
+
+## 1. Projekt Oversigt
+```markdown
+# Projekt Detaljer
+- Projektnavn: Håndbold Statistik
+- Beskrivelse: Python-baseret system til processering og analyse af håndboldkampe
+- Primære Teknologier:
+  - Backend: Python
+  - Database: SQLite
+  - Web Interface: Flask
+  - Data Processering: PyPDF2, Papaparse
+  - AI Integration: DeepSeek API
+- Primær Funktionalitet: PDF-parsing, kampstatistik analyse, web visualisering
+```
+
+## 2. Kodningsstandarder
+```markdown
+# Kodningsstandarder
+## Navngivningskonventioner
+- Python filer: snake_case (f.eks. process_output.py, scrape_matches.py)
+- Funktioner: snake_case (f.eks. convert_pdf_to_text, get_match_data)
+- Klasser: Undgås (funktionel tilgang foretrækkes)
+- Konstanter: UPPERCASE_SNAKE_CASE (f.eks. MAX_FILE_SIZE)
+
+## Fil Struktur Retningslinjer
+C:.
+├───CSV
+├───Databases
+├───Downloads
+├───Error_Appeared
+├───logs
+├───Not_Processed
+├───Processed
+├───website
+│   ├───static
+│   └───templates
+└───__pycache__
+
+- Hovemapper:
+  - /: Primære processerings-scripts
+  - /website: Web interface komponenter
+  - /Databases: SQLite databaser
+  - /logs: Logging filer
+  - /Not_Processed: Ubehandlede PDF'er
+  - /Processed: Behandlede PDF'er
+```
+
+## 3. AI Interaktions Retningslinjer
+```markdown
+# AI Interaktions Protokoller
+## Generelle Kodningsinstruktioner
+- Prioriter læsbar og vedligeholdelsesvenlig kode
+- Anvend type hints (typing module)
+- Implementer omfattende fejlhåndtering
+- Lav altid print statements til at logge fejl for at kunne se hvor fejl opstår
+- Dokumenter kompleks logik med docstrings
+- Følg PEP 8 standarder
+
+## Prompt Engineering
+- Beskriv specifikke dataprocesseringsudfordringer
+- Angiv forventede input/output formater
+- Referencér eksisterende projektkode
+- Fokuser på modulær og genbrugelig kode
+```
+
+## 4. Sikkerheds- og Miljøkonfiguration
+```markdown
+# Sikkerheds Regler
+## Miljøvariabel Håndtering
+- Brug .env fil til API nøgler
+- Gem aldrig sensitive data i kildekode
+- Tilføj .env til .gitignore
+- Anvend python-dotenv til indlæsning
+
+## API Interaktion
+- Implementer retry mekanismer ved API fejl
+- Log API kald og fejl
+- Tilføj timeout og fejlhåndtering
+- Beskyt mod rate limiting
+```
+
+## 5. Ydelsesoptimering
+```markdown
+# Ydelsesoptimering
+## Database Optimering
+- Anvend indekser på hyppigt forespurgte kolonner
+- Batch indsættelser i stedet for enkeltindsættelser
+- Begræns returneringsstørrelse ved store datasæt
+- Anvend SQLite connection pooling
+
+## Data Processering
+- Anvend generatorer ved store datasæt
+- Implementer lazy loading
+- Begræns hukommelsesforbruget
+- Anvend Papaparse med optimerede indstillinger
+```
+
+## 6. Test og Kvalitetssikring
+```markdown
+# Test og Kvalitetssikring
+## Test Krav
+- Unit tests for kritiske funktioner
+- Dækningsgrad over 70%
+- Anvend pytest
+- Test grænsetilfælde i data processering
+- Validér PDF parsing
+
+## Kodekvalitet
+- Anvend flake8 til statisk kodekontrol
+- Brug type checking med mypy
+- Undgå print statements i produktion
+- Fuld fejlhåndtering i alle funktioner
+```
+
+## 7. Deployment og Kontinuerlig Integration
+```markdown
+# Deployment Konfiguration
+## Kontinuerlig Integration
+- Automatiseret test ved hver commit
+- Verificér afhængigheder
+- Byg og test på tværs af Python versioner
+
+## Deployment Strategi
+- Dokumentér installationstrin
+- Anvend requirements.txt
+- Understøt virtuelle miljøer
+- Validér miljøopsætning
+```
+
+## 8. AI Agent Specifikke Instruktioner
+```markdown
+# AI Agent Instruktioner
+## Flerfilshåndtering
+- Vedligehold konsistent projektkontekst
+- Opdatér relaterede filer ved ændringer
+- Generer beskrivende commit beskeder
+- Respektér eksisterende projektstruktur
+
+## Terminal Interaktioner
+- Anvend pip til pakehåndtering
+- Foretræk reproducerbare kommandoer
+- Log vigtige handlinger
+```
+
+## 9. Projektspecifikke Retningslinjer
+```markdown
+# Specifikke Håndbold Statistik Regler
+- Standardisér holdnavne konsekvent
+- Validér data ved hver transformation
+- Gem rådata uændret
+- Log alle datarensnings- og standardiseringstrin
+- Understøt flere datakilder (PDF, web scraping)
+```
+
+## Tilpasning og Udvidelse
+```markdown
+# Tilpasningsnotes
+- Dette dokument er dynamisk
+- Gennemgå kvartalsvist
+- Tilpas efter projektets evolution
+- Implementér teamfeedback
+```

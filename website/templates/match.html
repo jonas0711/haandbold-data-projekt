@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ home_team }} vs {{ away_team }} - {{ date }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4267b2;
+            --win-color: #34c759;
+            --lose-color: #ff3b30;
+            --draw-color: #ff9500;
+            --background-color: #f0f2f5;
+            --card-background: #ffffff;
+            --text-primary: #1c1e21;
+            --text-secondary: #65676b;
+            --border-radius: 12px;
+        }
+
+        body {
+            background-color: var(--background-color);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-primary);
+        }
+
+        .navbar {
+            background-color: var(--card-background);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .navbar-brand {
+            color: var(--primary-color) !important;
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .navbar-brand i {
+            font-size: 1.8rem;
+        }
+
+        .match-header {
+            background-color: var(--card-background);
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            border-radius: var(--border-radius);
+        }
+
+        .team-name {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .team-icon {
+            width: 64px;
+            height: 64px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 auto 1rem;
+        }
+
+        .score-container {
+            background: var(--primary-color);
+            color: white;
+            border-radius: var(--border-radius);
+            padding: 1rem 2rem;
+            font-weight: 700;
+            font-size: 3rem;
+            text-align: center;
+            position: relative;
+            margin: 1rem 0;
+        }
+
+        .match-date {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .timeline-container {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .timeline-item {
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary-color);
+            margin-bottom: 1.5rem;
+            background-color: var(--background-color);
+            border-radius: var(--border-radius);
+            transition: transform 0.2s ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(4px);
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .event-time {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .event-score {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            padding: 0.25rem 1rem;
+            background-color: var(--card-background);
+            border-radius: 20px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .event-type {
+            color: var(--text-primary);
+            font-weight: 500;
+            margin: 0 0.5rem;
+        }
+
+        .player-name {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            background-color: var(--primary-color);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: var(--primary-color);
+        }
+
+        .stats-card {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+        }
+
+        .stats-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .progress {
+            height: 1.5rem;
+            background-color: var(--background-color);
+            border-radius: var(--border-radius);
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .progress-bar.home-team {
+            background-color: var(--win-color);
+        }
+
+        .progress-bar.away-team {
+            background-color: var(--lose-color);
+        }
+
+        .team-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        .team-score {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .stat-card {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 0.5rem 0;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .team-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+        
+        .team-stat {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .team-stat-value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .team-stat-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .event-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+        }
+        
+        .event-badge i {
+            margin-right: 0.35rem;
+        }
+        
+        .event-badge.goal {
+            background-color: var(--win-color);
+            color: white;
+        }
+        
+        .event-badge.shot {
+            background-color: var(--primary-light);
+            color: white;
+        }
+        
+        .event-badge.save {
+            background-color: var(--draw-color);
+            color: white;
+        }
+        
+        .event-badge.card {
+            background-color: var(--lose-color);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="/" aria-label="Håndbold Statistik Hjem">
+                <i class="fas fa-handball-ball" aria-hidden="true"></i>
+                Håndbold Statistik
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="match-header">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-4 text-center">
+                        <div class="team-icon">
+                            <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                        </div>
+                        <div class="team-name">{{ home_team }}</div>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="score-container">
+                            {{ score[0] }}-{{ score[1] }}
+                        </div>
+                        <div class="match-date">
+                            <i class="far fa-calendar-alt" aria-hidden="true"></i>
+                            {{ date }}
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="team-icon">
+                            <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                        </div>
+                        <div class="team-name">{{ away_team }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <h2 class="section-title">
+                    <i class="fas fa-stream" aria-hidden="true"></i>
+                    Kampforløb
+                </h2>
+                <div class="timeline-container">
+                    {% for event in events %}
+                    <div class="timeline-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="event-time">
+                                <i class="far fa-clock" aria-hidden="true"></i>
+                                {{ event.Time }}
+                            </span>
+                        </div>
+                        <div class="mt-3">
+                            {% if event.Team_initials %}
+                            <span class="event-badge {% if event.Action_1 == 'Mål' %}goal{% elif event.Action_1 == 'Skudforsøg' %}shot{% elif event.Action_1 == 'Redning' %}save{% endif %}">
+                                <i class="fas {% if event.Action_1 == 'Mål' %}fa-futbol{% elif event.Action_1 == 'Skudforsøg' %}fa-bullseye{% elif event.Action_1 == 'Redning' %}fa-hand-paper{% else %}fa-circle{% endif %}" aria-hidden="true"></i>
+                                {{ event.Team_initials }}
+                            </span>
+                            {% endif %}
+                            {% if event.Action_1 %}
+                            <span class="event-type">{{ event.Action_1 }}</span>
+                            {% endif %}
+                            {% if event.Player_Name %}
+                            <span class="player-name">{{ event.Player_Name }}</span>
+                            {% endif %}
+                            {% if event.Action_2 %}
+                            <span class="event-type">{{ event.Action_2 }}</span>
+                            {% endif %}
+                            {% if event.Player2_Name %}
+                            <span class="player-name">{{ event.Player2_Name }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <h2 class="section-title">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i>
+                    Statistik
+                </h2>
+                <div class="stats-card">
+                    <div class="stats-title">
+                        <i class="fas fa-futbol" aria-hidden="true"></i>
+                        Mål
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar home-team" role="progressbar" 
+                             style="width: {{ (stats.goals.home / (stats.goals.home + stats.goals.away) * 100) if (stats.goals.home + stats.goals.away) > 0 else 0 }}%">
+                        </div>
+                        <div class="progress-bar away-team" role="progressbar" 
+                             style="width: {{ (stats.goals.away / (stats.goals.home + stats.goals.away) * 100) if (stats.goals.home + stats.goals.away) > 0 else 0 }}%">
+                        </div>
+                    </div>
+                    <div class="team-stats">
+                        <div class="team-stat">
+                            <div class="team-stat-value">{{ stats.goals.home }}</div>
+                            <div class="team-stat-label">{{ home_team }}</div>
+                        </div>
+                        <div class="team-stat">
+                            <div class="team-stat-value">{{ stats.goals.away }}</div>
+                            <div class="team-stat-label">{{ away_team }}</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-bullseye" aria-hidden="true"></i>
+                        <div class="stat-label">Skud</div>
+                        <div class="team-stats">
+                            <div class="team-stat">
+                                <div class="team-stat-value">{{ stats.shots.home }}</div>
+                                <div class="team-stat-label">Hjem</div>
+                            </div>
+                            <div class="team-stat">
+                                <div class="team-stat-value">{{ stats.shots.away }}</div>
+                                <div class="team-stat-label">Ude</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <i class="fas fa-hand-paper" aria-hidden="true"></i>
+                        <div class="stat-label">Redninger</div>
+                        <div class="team-stats">
+                            <div class="team-stat">
+                                <div class="team-stat-value">{{ stats.saves.home }}</div>
+                                <div class="team-stat-label">Hjem</div>
+                            </div>
+                            <div class="team-stat">
+                                <div class="team-stat-value">{{ stats.saves.away }}</div>
+                                <div class="team-stat-label">Ude</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <i class="fas fa-users" aria-hidden="true"></i>
+                        <div class="stat-label">Spillere Brugt</div>
+                        <div class="team-stats">
+                            <div class="team-stat">
+                                <div class="team-stat-value">{{ stats.players.home }}</div>
+                                <div class="team-stat-label">Hjem</div>
+                            </div>
+                            <div class="team-stat">
+                                <div class="team-stat-value">{{ stats.players.away }}</div>
+                                <div class="team-stat-label">Ude</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 
