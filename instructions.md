@@ -185,5 +185,11 @@ class ErrorResponse:
 - Kør tests før merge
 - Opdatér dokumentation løbende
 
+Vi har oprettet et alias kaldet autocommit. Du kan nu bruge følgende kommando hver gang du vil committe og pushe ændringer automatisk:
+Dette vil:
+Tilføje alle ændrede filer (git add -A)
+Committe med beskeden "Automatisk commit af ændringer"
+Pushe ændringerne til GitHub
+
 ## Konklusion
 Dette dokument tjener som central reference for projektets arkitektur, design og implementeringsretningslinjer. Det sikrer konsistens, kvalitet og retning for Håndbold Statistik projektet.
