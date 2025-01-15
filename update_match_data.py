@@ -143,27 +143,42 @@ def get_team_players(cursor: sqlite3.Cursor, team_initial: str) -> Tuple[Set[str
 
 def create_match_data_table(cursor: sqlite3.Cursor):
     """Opretter match_data tabel"""
+    cursor.execute('DROP TABLE IF EXISTS match_data')
     cursor.execute('''
-    CREATE TABLE IF NOT EXISTS match_data (
-        home_team_initial TEXT NOT NULL,
-        away_team_initial TEXT NOT NULL,
-        home_score INTEGER NOT NULL,
-        away_score INTEGER NOT NULL,
-        home_team_players INTEGER NOT NULL,
-        away_team_players INTEGER NOT NULL,
-        home_team_goalkeepers INTEGER NOT NULL,
-        away_team_goalkeepers INTEGER NOT NULL
+    CREATE TABLE match_data (
+        home_team_initial TEXT,
+        away_team_initial TEXT,
+        home_score INTEGER,
+        away_score INTEGER,
+        home_team_players INTEGER,
+        away_team_players INTEGER,
+        home_team_goalkeepers INTEGER,
+        away_team_goalkeepers INTEGER
     )
     ''')
 
 def create_players_table(cursor: sqlite3.Cursor):
     """Opretter players tabel"""
+    cursor.execute('DROP TABLE IF EXISTS players')
     cursor.execute('''
-    CREATE TABLE IF NOT EXISTS players (
-        team_initial TEXT NOT NULL,
-        player_name TEXT NOT NULL,
-        player_type TEXT NOT NULL,
-        PRIMARY KEY (team_initial, player_name)
+    CREATE TABLE players (
+        team_initial TEXT,
+        player_name TEXT,
+        player_type TEXT
+    )
+    ''')
+
+def create_team_info_table(cursor: sqlite3.Cursor):
+    """Opretter team_info tabel"""
+    cursor.execute('DROP TABLE IF EXISTS team_info')
+    cursor.execute('''
+    CREATE TABLE team_info (
+        home_team_name TEXT,
+        home_team_initial TEXT,
+        away_team_name TEXT,
+        away_team_initial TEXT,
+        match_date TEXT,
+        last_updated TEXT
     )
     ''')
 
@@ -176,6 +191,7 @@ def update_database(db_path: str):
             # Opret tabeller
             create_match_data_table(cursor)
             create_players_table(cursor)
+            create_team_info_table(cursor)
             
             # Hent nødvendig data
             home_score, away_score = get_final_score(cursor)
